@@ -6,6 +6,7 @@
     <title>E-File Management System</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/1.5.4/css/colReorder.bootstrap5.min.css">
     <style>
         .sidebar {
             position: fixed;
@@ -58,21 +59,35 @@
             box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
         }
 
-        .footer {
-            position: fixed;
-            bottom: 0;
+        .sidebar h1 {
+            text-align: center;
             width: 100%;
-            height: 56px; 
+        }
+
+        .content-wrapper {
+            min-height: calc(100vh - 56px); /* Adjust for footer height */
+            position: relative;
+            padding-bottom: 56px; /* Adjust for footer height */
+        }
+
+        .header {
+            width: 100%;
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <header class="bg-dark text-white p-3 text-center">
+    <div class="container-fluid content-wrapper">
+        <header class="bg-dark text-white p-3 text-center header">
+            <div class="container-fluid">
+                <h1>E-File Management System</h1>
+            </div>
         </header>
         <div class="row">
             <nav class="col-md-2 sidebar">
-                <header class="bg-dark text-white p-3 text-center d-flex justify-content-center align-items-center">
+                <header class="bg-dark text-white p-3 text-center d-flex justify-content-center align-items-center w-100">
+
                     <img src="{{ asset('storage/images/nia-logo.png') }}" alt="Logo" class="me-2" style="height: 100px;">
                 </header>
                 <h1 class="m-0">NIA PIMO</h1>
@@ -84,69 +99,68 @@
             </nav>
             <main class="col-md-10 main-content">
                 @yield('content')
-                <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                        </tr>
-                    </thead>
-                    <thead>
-                        <tr>
-                            <th><input type="text" placeholder="Search Name" /></th>
-                            <th><input type="text" placeholder="Search Position" /></th>
-                            <th><input type="text" placeholder="Search Office" /></th>
-                            <th><input type="text" placeholder="Search Age" /></th>
-                            <th><input type="text" placeholder="Search Start date" /></th>
-                            <th><input type="text" placeholder="Search Salary" /></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive bg-white p-3 rounded">
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Age</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <th><input type="text" placeholder="Search Name" /></th>
+                                <th><input type="text" placeholder="Search Position" /></th>
+                                <th><input type="text" placeholder="Search Office" /></th>
+                                <th><input type="text" placeholder="Search Age" /></th>
+                                <th><input type="text" placeholder="Search Start date" /></th>
+                                <th><input type="text" placeholder="Search Salary" /></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tiger Nixon</td>
+                                <td>System Architect</td>
+                                <td>Edinburgh</td>
+                                <td>61</td>
+                                <td>2011/04/25</td>
+                                <td>$320,800</td>
+                            </tr>
+                            <tr>
+                                <td>Garrett Winters</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>63</td>
+                                <td>2011/07/25</td>
+                                <td>$170,750</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </main>
         </div>
-        <footer class="bg-dark text-white text-center p-2 footer d-flex justify-content-center align-items-center">
-            <p class="m-0">&copy; 2025 NIA PIMO Institutional Development Unit File System Management</p>
-        </footer>
+        @include('layouts.footer')
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/colreorder/1.5.4/js/dataTables.colReorder.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Setup - add a text input to each footer cell
             $('#example thead tr:eq(1) th').each(function () {
                 var title = $(this).text();
                 $(this).html('<input type="text" placeholder="Search ' + title + '" />');
             });
+            var table = $('#example').DataTable({
+                colReorder: true
+            });
 
-            // DataTable
-            var table = $('#example').DataTable();
-
-            // Apply the search
             table.columns().every(function () {
                 var that = this;
 
