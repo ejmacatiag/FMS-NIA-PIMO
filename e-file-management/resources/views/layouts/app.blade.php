@@ -91,6 +91,20 @@
         .dropdown-item:hover {
             background-color: #659acf;
         }
+
+        .dataTables_wrapper {
+            box-shadow: 0 8px 16px rgba(9, 16, 87, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .dataTables_wrapper .dataTables_paginate {
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -127,31 +141,146 @@
                                 <th>Name</th>
                                 <th>Position</th>
                                 <th>Office</th>
-                                <th>Start date</th>
+                                <th>Start Date</th>
+                                <th>Salary</th>
+                                <th>Department</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
                             </tr>
                             <tr>
-                                <th><input type="text" class="column-search"></th>
-                                <th><input type="text" class="column-search"></th>
-                                <th><input type="text" class="column-search"></th>
-                                <th><input type="text" class="column-search"></th>
+                                <th><input type="text" class="column-search" placeholder="Search Name"></th>
+                                <th><input type="text" class="column-search" placeholder="Search Position"></th>
+                                <th><input type="text" class="column-search" placeholder="Search Office"></th>
+                                <th><input type="text" class="column-search" placeholder="Search Start Date"></th>
+                                <th><input type="text" class="column-search" placeholder="Search Salary"></th>
+                                <th><input type="text" class="column-search" placeholder="Search Department"></th>
+                                <th><input type="text" class="column-search" placeholder="Search Email"></th>
+                                <th><input type="text" class="column-search" placeholder="Search Phone"></th>
                             </tr>
                         </thead>
-                        
                         <tbody>
                             <tr>
                                 <td>Tiger Nixon</td>
                                 <td>System Architect</td>
                                 <td>Edinburgh</td>
                                 <td>2011/04/25</td>
+                                <td>$320,800</td>
+                                <td>IT</td>
+                                <td>tiger.nixon@example.com</td>
+                                <td>(123) 456-7890</td>
                             </tr>
                             <tr>
                                 <td>Garrett Winters</td>
                                 <td>Accountant</td>
                                 <td>Tokyo</td>
                                 <td>2011/07/25</td>
+                                <td>$170,750</td>
+                                <td>Finance</td>
+                                <td>garrett.winters@example.com</td>
+                                <td>(987) 654-3210</td>
+                            </tr>
+                            <tr>
+                                <td>Ashton Cox</td>
+                                <td>Junior Technical Author</td>
+                                <td>San Francisco</td>
+                                <td>2009/01/12</td>
+                                <td>$86,000</td>
+                                <td>Documentation</td>
+                                <td>ashton.cox@example.com</td>
+                                <td>(456) 789-1234</td>
+                            </tr>
+                            <tr>
+                                <td>Cedric Kelly</td>
+                                <td>Senior JavaScript Developer</td>
+                                <td>Edinburgh</td>
+                                <td>2012/03/29</td>
+                                <td>$433,060</td>
+                                <td>Development</td>
+                                <td>cedric.kelly@example.com</td>
+                                <td>(321) 654-9870</td>
+                            </tr>
+                            <tr>
+                                <td>Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                                <td>Finance</td>
+                                <td>airi.satou@example.com</td>
+                                <td>(789) 123-4567</td>
+                            </tr>
+                            <tr>
+                                <td>Brielle Williamson</td>
+                                <td>Integration Specialist</td>
+                                <td>New York</td>
+                                <td>2012/12/02</td>
+                                <td>$372,000</td>
+                                <td>IT</td>
+                                <td>brielle.williamson@example.com</td>
+                                <td>(654) 321-9876</td>
+                            </tr>
+                            <tr>
+                                <td>Herrod Chandler</td>
+                                <td>Sales Assistant</td>
+                                <td>San Francisco</td>
+                                <td>2012/08/06</td>
+                                <td>$137,500</td>
+                                <td>Sales</td>
+                                <td>herrod.chandler@example.com</td>
+                                <td>(852) 963-7410</td>
+                            </tr>
+                            <tr>
+                                <td>Rhona Davidson</td>
+                                <td>Integration Specialist</td>
+                                <td>Tokyo</td>
+                                <td>2010/10/14</td>
+                                <td>$327,900</td>
+                                <td>IT</td>
+                                <td>rhona.davidson@example.com</td>
+                                <td>(951) 753-2580</td>
+                            </tr>
+                            <tr>
+                                <td>Colleen Hurst</td>
+                                <td>Javascript Developer</td>
+                                <td>San Francisco</td>
+                                <td>2009/09/15</td>
+                                <td>$205,500</td>
+                                <td>Development</td>
+                                <td>colleen.hurst@example.com</td>
+                                <td>(147) 258-3690</td>
+                            </tr>
+                            <tr>
+                                <td>Sonya Frost</td>
+                                <td>Software Engineer</td>
+                                <td>Edinburgh</td>
+                                <td>2008/12/13</td>
+                                <td>$103,600</td>
+                                <td>Engineering</td>
+                                <td>sonya.frost@example.com</td>
+                                <td>(369) 147-2580</td>
+                            </tr>
+                            <tr>
+                                <td>Jena Gaines</td>
+                                <td>Office Manager</td>
+                                <td>London</td>
+                                <td>2008/12/19</td>
+                                <td>$90,560</td>
+                                <td>Administration</td>
+                                <td>jena.gaines@example.com</td>
+                                <td>(753) 951-8520</td>
+                            </tr>
+                            <tr>
+                                <td>Quinn Flynn</td>
+                                <td>Support Lead</td>
+                                <td>Edinburgh</td>
+                                <td>2013/03/03</td>
+                                <td>$342,000</td>
+                                <td>Support</td>
+                                <td>quinn.flynn@example.com</td>
+                                <td>(258) 369-1470</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table>                    
                 </div>
             </main>
             
@@ -194,11 +323,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="box_id" class="form-label">Select Box</label>
-                            <select class="form-select" name="box_id" id="box_id" required>
+                            {{-- <select class="form-select" name="box_id" id="box_id" required>
                                 @foreach($boxes as $box)
                                     <option value="{{ $box->id }}">{{ $box->box_name }}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                         </div>
                         <button type="submit" class="btn btn-primary">Save Folder</button>
                     </form>
@@ -230,11 +359,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="folder_id" class="form-label">Select Folder</label>
-                            <select class="form-select" name="folder_id" id="folder_id" required>
+                            {{-- <select class="form-select" name="folder_id" id="folder_id" required>
                                 @foreach($folders as $folder)
                                     <option value="{{ $folder->id }}">{{ $folder->folder_name }}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                         </div>
                         <div class="mb-3">
                             <label for="date_received" class="form-label">Date Received</label>
@@ -255,31 +384,32 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/colreorder/1.5.4/js/dataTables.colReorder.min.js"></script>
+    <script src="https://cdn.datatables.net/colresize/1.0.0/js/dataTables.colResize.min.js"></script>
     <script>
         $(document).ready(function () {
-        var table = $('#example').DataTable({
-            colReorder: false, 
-            fixedHeader: true, 
-            orderCellsTop: true, 
-            paging: true, 
-            searching: true, 
-            autoWidth: false, 
-            retrieve: true 
-        });
+            var table = $('#example').DataTable({
+                colReorder: false, 
+                colResize: true,
+                fixedHeader: true, 
+                orderCellsTop: true, 
+                paging: true, 
+                searching: true, 
+                autoWidth: false, 
+                retrieve: true
+            });
 
-     // search inputs to the correct row
-     $('#example thead tr:eq(1) th').each(function (i) {
+            // Move the search inputs to the correct row
+            $('#example thead tr:eq(1) th').each(function (i) {
                 var title = $('#example thead tr:eq(0) th').eq(i).text();
                 $(this).html('<input type="text" class="column-search" placeholder="Search ' + title + '">');
             });
 
-    // column search
-    $('.column-search').on('keyup change', function () {
-            var colIndex = $(this).parent().index();
-            table.column(colIndex).search(this.value).draw();
+            // Apply column search
+            $('.column-search').on('keyup change', function () {
+                var colIndex = $(this).parent().index();
+                table.column(colIndex).search(this.value).draw();
+            });
         });
-});
 
         $(document).ready(function() {
             $('.dropdown-menu').on('click', function(event) {
