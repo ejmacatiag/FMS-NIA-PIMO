@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/1.5.4/css/colReorder.bootstrap5.min.css">
     <style>
-          .sidebar {
+        .sidebar {
             position: fixed;
             top: 0;
             bottom: 0;
             left: 0;
             width: 250px;
-            background-color: #212529;
+            background-color: #0e3257;
             color: white;
             padding-top: 20px;
         }
@@ -27,7 +27,7 @@
         }
 
         .sidebar .nav-link:hover, .dropdown-item:hover {
-            background-color: #002244;
+            background-color: #082f55;
         }
 
         .main-content {
@@ -79,7 +79,7 @@
         }
 
         .dropdown-menu {
-            background-color: #212529;
+            background-color: #0a2139;
             width: 100%;
             border: none;
         }
@@ -89,7 +89,7 @@
         }
 
         .dropdown-item:hover {
-            background-color: #002244;
+            background-color: #659acf;
         }
     </style>
 </head>
@@ -97,7 +97,7 @@
     <div class="container-fluid content-wrapper">
         <div class="row">
             <nav class="col-md-2 sidebar">
-                <header class="bg-dark text-white p-3 text-center d-flex justify-content-center align-items-center w-100">
+                <header class="text-white p-3 text-center d-flex justify-content-center align-items-center w-100">
                     <img src="{{ asset('storage/images/nia-logo.png') }}" alt="Logo" class="me-2" style="height: 100px;">
                 </header>
                 <h1 class="m-0 text-center">NIA PIMO</h1>
@@ -114,12 +114,7 @@
                     </li>
                 </ul>
             </nav>
-    
-            {{-- <header class="bg-dark text-white p-3  header">
-                <div class="container-fluid">
-                    <h1>Irrigator's Association</h1>
-                </div>
-            </header> --}}
+
             <main class="col-md-10 main-content">
                 @yield('content')
                 <div class="container-fluid">
@@ -134,15 +129,14 @@
                                 <th>Office</th>
                                 <th>Start date</th>
                             </tr>
-                        </thead>
-                        <thead>
                             <tr>
-                                <th><input type="text" placeholder="Search Name" /></th>
-                                <th><input type="text" placeholder="Search Position" /></th>
-                                <th><input type="text" placeholder="Search Office" /></th>
-                                <th><input type="text" placeholder="Search Start date" /></th>
+                                <th><input type="text" class="column-search"></th>
+                                <th><input type="text" class="column-search"></th>
+                                <th><input type="text" class="column-search"></th>
+                                <th><input type="text" class="column-search"></th>
                             </tr>
                         </thead>
+                        
                         <tbody>
                             <tr>
                                 <td>Tiger Nixon</td>
@@ -263,29 +257,31 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/colreorder/1.5.4/js/dataTables.colReorder.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#example thead tr:eq(1) th').each(function () {
-                var title = $(this).text();
-                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-            });
-            var table = $('#example').DataTable({
-                colReorder: true
-            });
-
-            table.columns().every(function () {
-                var that = this;
-
-                $('input', this.header()).on('keyup change clear', function () {
-                    if (that.search() !== this.value) {
-                        that
-                            .search(this.value)
-                            .draw();
-                    }
-                });
-            });
+        $(document).ready(function () {
+        var table = $('#example').DataTable({
+            colReorder: false, 
+            fixedHeader: true, 
+            orderCellsTop: true, 
+            paging: true, 
+            searching: true, 
+            autoWidth: false, 
+            retrieve: true 
         });
 
-                $(document).ready(function() {
+     // search inputs to the correct row
+     $('#example thead tr:eq(1) th').each(function (i) {
+                var title = $('#example thead tr:eq(0) th').eq(i).text();
+                $(this).html('<input type="text" class="column-search" placeholder="Search ' + title + '">');
+            });
+
+    // column search
+    $('.column-search').on('keyup change', function () {
+            var colIndex = $(this).parent().index();
+            table.column(colIndex).search(this.value).draw();
+        });
+});
+
+        $(document).ready(function() {
             $('.dropdown-menu').on('click', function(event) {
                 event.stopPropagation(); // Prevent the dropdown from closing when clicking inside it
             });
