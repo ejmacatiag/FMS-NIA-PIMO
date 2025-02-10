@@ -218,11 +218,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="box_id" class="form-label">Select Box</label>
-                            {{-- <select class="form-select" name="box_id" id="box_id" required>
+                            <select class="form-select" name="box_id" id="box_id" required>
                                 @foreach($boxes as $box)
                                     <option value="{{ $box->id }}">{{ $box->box_name }}</option>
                                 @endforeach
-                            </select> --}}
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Save Folder</button>
                     </form>
@@ -254,11 +254,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="folder_id" class="form-label">Select Folder</label>
-                            {{-- <select class="form-select" name="folder_id" id="folder_id" required>
+                            <select class="form-select" name="folder_id" id="folder_id" required>
                                 @foreach($folders as $folder)
                                     <option value="{{ $folder->id }}">{{ $folder->folder_name }}</option>
                                 @endforeach
-                            </select> --}}
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="date_received" class="form-label">Date Received</label>
