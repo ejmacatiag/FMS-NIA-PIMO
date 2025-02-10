@@ -16,7 +16,7 @@ class BoxController extends Controller
     public function create()
     {
         return view('box.create');
-    }
+    } 
 
     public function store(Request $request)
     {
@@ -31,7 +31,6 @@ class BoxController extends Controller
         ]);
 
         return redirect()->route('boxes.index')->with('success', 'Box added successfully!');
-
     }
 
     public function edit(Box $box)

@@ -120,42 +120,53 @@
                     <h1>Irrigator's Association</h1>
                 </div>
             </header> --}}
+
             <main class="col-md-10 main-content">
                 @yield('content')
+                
                 <div class="container-fluid">
                     <h1>Irrigator's Association</h1>
                 </div>
+                
                 <div class="table-responsive bg-white p-3 rounded">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <table id="fileTable" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Start date</th>
-                            </tr>
-                        </thead>
-                        <thead>
-                            <tr>
-                                <th><input type="text" placeholder="Search Name" /></th>
-                                <th><input type="text" placeholder="Search Position" /></th>
-                                <th><input type="text" placeholder="Search Office" /></th>
-                                <th><input type="text" placeholder="Search Start date" /></th>
+                                <th>ID</th>
+                                <th>IA Name</th>
+                                <th>Project Name</th>
+                                <th>Folder Name</th>
+                                <th>File Type</th>
+                                <th>Date Received</th>
+                                <th>File</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>2011/04/25</td>
-                            </tr>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>2011/07/25</td>
-                            </tr>
+                            @if(isset($files) && count($files) > 0)
+                                @foreach($files as $file)
+                                    <tr>
+                                        <td>{{ $file->id }}</td>
+                                        <td>{{ $file->ia_name }}</td>
+                                        <td>{{ $file->project_name }}</td>
+                                        <td>{{ $file->folder ? $file->folder->folder_name : 'No Folder' }}</td>
+                                        <td>{{ pathinfo($file->file_path, PATHINFO_EXTENSION) }}</td>
+                                        <td>{{ $file->date_received }}</td>
+                                        <td>
+                                            <a href="{{ asset('storage/' . $file->file_path) }}" target="_blank" class="btn btn-sm btn-primary">
+                                                View File
+                                            </a>
+                                        </td>
+                                        <td>{{ $file->created_at->format('Y-m-d H:i') }}</td>
+                                        <td>{{ $file->updated_at->format('Y-m-d H:i') }}</td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="9" class="text-center">No files found.</td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -163,7 +174,7 @@
             
             @include('layouts.footer')
         </div>
-    </div>
+    </div> 
     {{-- box modal --}}
     <div class="modal fade" id="addBoxModal">
         <div class="modal-dialog">
@@ -201,10 +212,14 @@
                         <div class="mb-3">
                             <label for="box_id" class="form-label">Select Box</label>
                             <select class="form-select" name="box_id" id="box_id" required>
-                                @foreach($boxes as $box)
-                                    <option value="{{ $box->id }}">{{ $box->box_name }}</option>
-                                @endforeach
-                            </select>
+                                @if(isset($boxes) && count($boxes) > 0)
+                                    @foreach($boxes as $box)
+                                        <option value="{{ $box->id }}">{{ $box->box_name }}</option>
+                                    @endforeach
+                                @else
+                                    <option value="">No boxes available</option>
+                                @endif
+                            </select>       
                         </div>
                         <button type="submit" class="btn btn-primary">Save Folder</button>
                     </form>
@@ -237,10 +252,14 @@
                         <div class="mb-3">
                             <label for="folder_id" class="form-label">Select Folder</label>
                             <select class="form-select" name="folder_id" id="folder_id" required>
-                                @foreach($folders as $folder)
-                                    <option value="{{ $folder->id }}">{{ $folder->folder_name }}</option>
-                                @endforeach
-                            </select>
+                                @isset($folders)
+                                    @foreach($folders as $folder)
+                                        <option value="{{ $folder->id }}">{{ $folder->folder_name }}</option>
+                                    @endforeach
+                                @else
+                                    <option value="">No folders available</option>
+                                @endisset
+                            </select>                             
                         </div>
                         <div class="mb-3">
                             <label for="date_received" class="form-label">Date Received</label>
@@ -263,34 +282,36 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/colreorder/1.5.4/js/dataTables.colReorder.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#example thead tr:eq(1) th').each(function () {
-                var title = $(this).text();
-                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-            });
+        $(document).ready(function () {
             var table = $('#example').DataTable({
-                colReorder: true
+                colReorder: false, 
+                colResize: true,
+                fixedHeader: true, 
+                orderCellsTop: true, 
+                paging: true, 
+                searching: true, 
+                autoWidth: false, 
+                retrieve: true
             });
 
-            table.columns().every(function () {
-                var that = this;
+            // Move the search inputs to the correct row
+            $('#example thead tr:eq(1) th').each(function (i) {
+                var title = $('#example thead tr:eq(0) th').eq(i).text();
+                $(this).html('<input type="text" class="column-search" placeholder="Search ' + title + '">');
+            });
 
-                $('input', this.header()).on('keyup change clear', function () {
-                    if (that.search() !== this.value) {
-                        that
-                            .search(this.value)
-                            .draw();
-                    }
-                });
+            $('.column-search').on('keyup change', function () {
+                var colIndex = $(this).parent().index();
+                table.column(colIndex).search(this.value).draw();
             });
         });
+
 
                 $(document).ready(function() {
             $('.dropdown-menu').on('click', function(event) {
-                event.stopPropagation(); // Prevent the dropdown from closing when clicking inside it
+                event.stopPropagation(); 
             });
         });
-
     </script>
 </body>
 </html>
