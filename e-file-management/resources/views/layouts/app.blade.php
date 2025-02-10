@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/1.5.4/css/colReorder.bootstrap5.min.css">
     <style>
-          .sidebar {
+        .sidebar {
             position: fixed;
             top: 0;
             bottom: 0;
             left: 0;
             width: 250px;
-            background-color: #212529;
+            background-color: #0e3257;
             color: white;
             padding-top: 20px;
         }
@@ -27,7 +27,7 @@
         }
 
         .sidebar .nav-link:hover, .dropdown-item:hover {
-            background-color: #002244;
+            background-color: #082f55;
         }
 
         .main-content {
@@ -79,7 +79,7 @@
         }
 
         .dropdown-menu {
-            background-color: #212529;
+            background-color: #0a2139;
             width: 100%;
             border: none;
         }
@@ -89,7 +89,21 @@
         }
 
         .dropdown-item:hover {
-            background-color: #002244;
+            background-color: #659acf;
+        }
+
+        .dataTables_wrapper {
+            box-shadow: 0 8px 16px rgba(9, 16, 87, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .dataTables_wrapper .dataTables_paginate {
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -97,7 +111,7 @@
     <div class="container-fluid content-wrapper">
         <div class="row">
             <nav class="col-md-2 sidebar">
-                <header class="bg-dark text-white p-3 text-center d-flex justify-content-center align-items-center w-100">
+                <header class="text-white p-3 text-center d-flex justify-content-center align-items-center w-100">
                     <img src="{{ asset('storage/images/nia-logo.png') }}" alt="Logo" class="me-2" style="height: 100px;">
                 </header>
                 <h1 class="m-0 text-center">NIA PIMO</h1>
@@ -114,12 +128,15 @@
                     </li>
                 </ul>
             </nav>
+<<<<<<< HEAD
     
             {{-- <header class="bg-dark text-white p-3  header">
                 <div class="container-fluid">
                     <h1>Irrigator's Association</h1>
                 </div>
             </header> --}}
+=======
+>>>>>>> a7d7bdad2320680b0a8e024d9f4f77c2ad79528a
 
             <main class="col-md-10 main-content">
                 @yield('content')
@@ -132,6 +149,7 @@
                     <table id="fileTable" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
+<<<<<<< HEAD
                                 <th>ID</th>
                                 <th>IA Name</th>
                                 <th>Project Name</th>
@@ -167,8 +185,46 @@
                                     <td colspan="9" class="text-center">No files found.</td>
                                 </tr>
                             @endif
+=======
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Start Date</th>
+                                <th>Salary</th>
+                            </tr>
+                            <tr>
+                                <th><input type="text" class="column-search" placeholder="Search Name"></th>
+                                <th><input type="text" class="column-search" placeholder="Search Position"></th>
+                                <th><input type="text" class="column-search" placeholder="Search Office"></th>
+                                <th><input type="text" class="column-search" placeholder="Search Start Date"></th>
+                                <th><input type="text" class="column-search" placeholder="Search Salary"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tiger Nixon</td>
+                                <td>System Architect</td>
+                                <td>Edinburgh</td>
+                                <td>2011/04/25</td>
+                                <td>$320,800</td>
+                            </tr>
+                            <tr>
+                                <td>Garrett Winters</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>2011/07/25</td>
+                                <td>$170,750</td>
+                            </tr>
+                            <tr>
+                                <td>Ashton Cox</td>
+                                <td>Junior Technical Author</td>
+                                <td>San Francisco</td>
+                                <td>2009/01/12</td>
+                                <td>$86,000</td>
+                            </tr>
+>>>>>>> a7d7bdad2320680b0a8e024d9f4f77c2ad79528a
                         </tbody>
-                    </table>
+                    </table>                    
                 </div>
             </main>
             
@@ -280,7 +336,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/colreorder/1.5.4/js/dataTables.colReorder.min.js"></script>
+    <script src="https://cdn.datatables.net/colresize/1.0.0/js/dataTables.colResize.min.js"></script>
     <script>
         $(document).ready(function () {
             var table = $('#example').DataTable({
@@ -300,14 +356,22 @@
                 $(this).html('<input type="text" class="column-search" placeholder="Search ' + title + '">');
             });
 
+<<<<<<< HEAD
+=======
+            // Apply column search
+>>>>>>> a7d7bdad2320680b0a8e024d9f4f77c2ad79528a
             $('.column-search').on('keyup change', function () {
                 var colIndex = $(this).parent().index();
                 table.column(colIndex).search(this.value).draw();
             });
         });
 
+<<<<<<< HEAD
 
                 $(document).ready(function() {
+=======
+        $(document).ready(function() {
+>>>>>>> a7d7bdad2320680b0a8e024d9f4f77c2ad79528a
             $('.dropdown-menu').on('click', function(event) {
                 event.stopPropagation(); 
             });
