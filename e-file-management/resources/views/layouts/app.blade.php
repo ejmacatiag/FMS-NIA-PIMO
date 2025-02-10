@@ -79,12 +79,9 @@
 </head>
 <body>
     <div class="container-fluid content-wrapper">
-        <header class="bg-dark text-white p-3 text-center header">
-            <div class="container-fluid">
-                <h1>E-File Management System</h1>
-            </div>
-        </header>
+        
         <div class="row">
+            
             <nav class="col-md-2 sidebar">
                 <header class="bg-dark text-white p-3 text-center d-flex justify-content-center align-items-center w-100">
 
@@ -97,7 +94,12 @@
                     <li class="nav-item"><a href="/files" class="nav-link">Files</a></li>
                 </ul>
             </nav>
-            <main class="col-md-10 main-content">
+            <header class="bg-dark text-white p-3 text-center header">
+                <div class="container-fluid">
+                    <h1>E-File Management System</h1>
+                </div>
+            </header>
+            <main class="col-md-10 main-content ">
                 @yield('content')
                 <div class="table-responsive bg-white p-3 rounded">
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -106,9 +108,7 @@
                                 <th>Name</th>
                                 <th>Position</th>
                                 <th>Office</th>
-                                <th>Age</th>
                                 <th>Start date</th>
-                                <th>Salary</th>
                             </tr>
                         </thead>
                         <thead>
@@ -116,9 +116,7 @@
                                 <th><input type="text" placeholder="Search Name" /></th>
                                 <th><input type="text" placeholder="Search Position" /></th>
                                 <th><input type="text" placeholder="Search Office" /></th>
-                                <th><input type="text" placeholder="Search Age" /></th>
                                 <th><input type="text" placeholder="Search Start date" /></th>
-                                <th><input type="text" placeholder="Search Salary" /></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -126,24 +124,23 @@
                                 <td>Tiger Nixon</td>
                                 <td>System Architect</td>
                                 <td>Edinburgh</td>
-                                <td>61</td>
                                 <td>2011/04/25</td>
-                                <td>$320,800</td>
+
                             </tr>
                             <tr>
                                 <td>Garrett Winters</td>
                                 <td>Accountant</td>
                                 <td>Tokyo</td>
-                                <td>63</td>
                                 <td>2011/07/25</td>
-                                <td>$170,750</td>
+
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </main>
-        </div>
         @include('layouts.footer')
+
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
