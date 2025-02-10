@@ -30,7 +30,8 @@ class BoxController extends Controller
             'box_description' => $request->box_description,
         ]);
 
-        return redirect()->route('box.index')->with('success', 'Box added successfully!');
+        return redirect()->route('boxes.index')->with('success', 'Box added successfully!');
+
     }
 
     public function edit(Box $box)

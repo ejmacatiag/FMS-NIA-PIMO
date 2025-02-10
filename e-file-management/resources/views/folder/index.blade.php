@@ -20,8 +20,8 @@
                     <tr>
                         <td>{{ $folder->folder_name }}</td>
                         <td>
-                            <a href="{{ route('folder.edit', $folder->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('folder.destroy', $folder->id) }}" method="POST" style="display:inline;">
+                            <a href="{{ route('folders.edit', $folder->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('folders.destroy', $folder->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
@@ -43,7 +43,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('folder.store') }}" method="POST">
+                <form action="{{ route('folders.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="folder_name" class="form-label">Folder Name</label>

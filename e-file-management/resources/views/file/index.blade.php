@@ -22,8 +22,8 @@
                         <td>{{ $file->file_name }}</td>
                         <td>{{ $file->folder->folder_name }}</td>
                         <td>
-                            <a href="{{ route('file.edit', $file->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('file.destroy', $file->id) }}" method="POST" style="display:inline;">
+                            <a href="{{ route('files.edit', $file->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('files.destroy', $file->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
@@ -45,7 +45,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('file.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('files.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="file_name" class="form-label">File Name</label>

@@ -12,6 +12,7 @@ class FolderController extends Controller
     {
         $folders = Folder::all();
         $boxes = Box::all();
+
         return view('folder.index', compact('folders', 'boxes'));
     }
 
@@ -33,7 +34,7 @@ class FolderController extends Controller
             'box_id' => $request->box_id,
         ]);
 
-        return redirect()->route('folder.index')->with('success', 'Folder added successfully!');
+        return redirect()->route('folders.index')->with('success', 'Folder added successfully!');
     }
 
     public function edit(Folder $folder)
@@ -54,12 +55,12 @@ class FolderController extends Controller
             'box_id' => $request->box_id,
         ]);
 
-        return redirect()->route('folder.index')->with('success', 'Folder updated successfully!');
+        return redirect()->route('folders.index')->with('success', 'Folder updated successfully!');
     }
 
     public function destroy(Folder $folder)
     {
         $folder->delete();
-        return redirect()->route('folder.index')->with('success', 'Folder deleted successfully!');
+        return redirect()->route('folders.index')->with('success', 'Folder deleted successfully!');
     }
 }
